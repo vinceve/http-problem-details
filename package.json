@@ -1,0 +1,27 @@
+{
+  "name": "http-problem-details",
+  "description": "Implementation of the RFC 7807 - Problem Details for HTTP APIs",
+  "author": "Vince Verberckt",
+  "repository": "https://github.com/vinceve/http-problem-details",
+  "version": "0.1.0",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types",
+  "scripts": {
+    "lint": "web-scripts lint",
+    "test": "web-scripts test",
+    "build": "web-scripts build",
+    "commit": "web-scripts commit",
+    "release": "web-scripts release"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "web-scripts commitmsg",
+      "pre-commit": "web-scripts precommit"
+    }
+  },
+  "devDependencies": {
+    "@spotify/web-scripts": "^1.0.1",
+    "husky": "^2.5.0"
+  }
+}
