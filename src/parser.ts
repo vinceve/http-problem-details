@@ -1,4 +1,4 @@
-import { Problem } from './types/problem';
+import { Problem } from './definitions/problem';
 
 export class Parser {
   read(incomingData: object | string, code?: number): Problem {
