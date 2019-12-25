@@ -1,9 +1,14 @@
 import { Parser } from './parser';
+import { Problem } from './definitions/problem';
+
+interface ProblemWithAParameter extends Problem {
+  aParameter: boolean;
+}
 
 describe('parser', () => {
   describe('read', () => {
     it('throws an error when no type is present', () => {
-      expect(() => new Parser().read({})).toThrowError('Data does not contain a problem definition.');
+      expect(() => new Parser().read<Problem>({})).toThrowError('Data does not contain a problem definition.');
     });
 
     it('parses a type from an incoming object', () => {
@@ -36,6 +41,10 @@ describe('parser', () => {
 
     it('takes the object status over the response status', () => {
       expect(new Parser().read({ type: 'https://verberckt.io/problem-type', status: 422 }, 400)).toEqual({ type: 'https://verberckt.io/problem-type', status: 422 });
+    });
+
+    it('takes the extra parameters also in the object', () => {
+      expect(new Parser().read<ProblemWithAParameter>({ type: 'https://verberckt.io/problem-type', status: 422, aParameter: true }, 400)).toEqual({ type: 'https://verberckt.io/problem-type', status: 422, aParameter: true });
     });
   });
 });

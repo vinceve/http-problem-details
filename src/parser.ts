@@ -1,26 +1,17 @@
 import { Problem } from './definitions/problem';
 
 export class Parser {
-  read(incomingData: object | string, code?: number): Problem {
-    const data = typeof incomingData === 'string' ? JSON.parse(incomingData) : incomingData;
+  read<T extends Problem>(incomingData: object | string, code?: number): T {
+    let data: T = typeof incomingData === 'string' ? JSON.parse(incomingData) : { ...incomingData };
 
     if (!data.type) {
       throw new Error("Data does not contain a problem definition.");
     }
 
-    const { type, title, detail, instance, status } = data;
-
-    let outgoingMessage: Problem = {
-      type,
-      title,
-      detail,
-      instance
-    };
-
-    if (status || code) {
-      outgoingMessage = { ...outgoingMessage, status: status ? status : code };
+    if (data.status || code) {
+      data = { ...data, status: data.status ? data.status : code };
     }
 
-    return outgoingMessage;
+    return data;
   }
 }
