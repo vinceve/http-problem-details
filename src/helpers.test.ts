@@ -4,7 +4,7 @@ interface ExtraParameters {
   aParameter: boolean;
 }
 
-describe('application', () => {
+describe('helpers', () => {
   describe('.readProblem', () => {
     it('Processes the input and returns the extensions', () => {
       const [, extensions] = readProblem<ExtraParameters>({ type: 'test', aParameter: true });
