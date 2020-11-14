@@ -1,8 +1,8 @@
-import { Problem } from './definitions/problem';
+import { Problem as ProblemType } from './definitions/problem';
 
-export class Parser {
-  read<T extends Problem>(incomingData: object | string, code?: number): T {
-    let data: T = typeof incomingData === 'string' ? JSON.parse(incomingData) : { ...incomingData };
+export class Problem {
+  public static read<P>(incomingData: object | string, code?: number): ProblemType<P> {
+    let data: ProblemType<P> = typeof incomingData === 'string' ? JSON.parse(incomingData) : { ...incomingData };
 
     if (!data.type) {
       throw new Error("Data does not contain a problem definition.");
